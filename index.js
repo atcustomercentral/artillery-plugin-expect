@@ -113,13 +113,15 @@ function expectationsPluginCheckExpectations(
   };
   userContext.expectations.push(requestExpectations);
 
-  FORMATTERS[userContext.expectationsPlugin.outputFormat].call(
-    this,
-    requestExpectations,
-    req,
-    res,
-    userContext
-  );
+  if (userContext.expectationsPlugin.outputFormat) {
+    FORMATTERS[userContext.expectationsPlugin.outputFormat].call(
+      this,
+      requestExpectations,
+      req,
+      res,
+      userContext
+    );
+  }
 
   if (userContext.expectationsPlugin.reporter) {
     REPORTERS[userContext.expectationsPlugin.reporter].call(
